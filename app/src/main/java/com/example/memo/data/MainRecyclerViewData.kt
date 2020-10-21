@@ -1,4 +1,4 @@
-package com.example.memo
+package com.example.memo.data
 
 data class MainRecyclerViewData (
     val title: String,

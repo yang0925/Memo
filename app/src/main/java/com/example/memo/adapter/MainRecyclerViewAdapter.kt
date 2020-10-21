@@ -1,9 +1,11 @@
-package com.example.memo
+package com.example.memo.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.memo.data.MainRecyclerViewData
+import com.example.memo.R
 import kotlinx.android.synthetic.main.main_recycler_item.view.*
 
 class MainRecyclerViewAdapter(val list: ArrayList<MainRecyclerViewData>): RecyclerView.Adapter<MainRecyclerViewAdapter.MainRecyclerViewHolder>() {
