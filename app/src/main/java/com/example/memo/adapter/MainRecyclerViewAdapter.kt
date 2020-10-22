@@ -1,5 +1,6 @@
 package com.example.memo.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,14 +9,27 @@ import com.example.memo.data.MainRecyclerViewData
 import com.example.memo.R
 import kotlinx.android.synthetic.main.main_recycler_item.view.*
 
-class MainRecyclerViewAdapter(val list: ArrayList<MainRecyclerViewData>): RecyclerView.Adapter<MainRecyclerViewAdapter.MainRecyclerViewHolder>() {
+class MainRecyclerViewAdapter(val list: ArrayList<MainRecyclerViewData>) :
+    RecyclerView.Adapter<MainRecyclerViewAdapter.MainRecyclerViewHolder>() {
 
     fun addItem(item: MainRecyclerViewData) {
         list.add(item)
         notifyDataSetChanged()
     }
+
+    fun removeAt(position: Int) {
+        list.removeAt(position)
+        notifyDataSetChanged()
+    }
+
+    fun getItem(position: Int): MainRecyclerViewData? {
+        return list[position]
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainRecyclerViewHolder {
-        return MainRecyclerViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.main_recycler_item, parent, false))
+        return MainRecyclerViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.main_recycler_item, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: MainRecyclerViewHolder, position: Int) {
@@ -26,7 +40,7 @@ class MainRecyclerViewAdapter(val list: ArrayList<MainRecyclerViewData>): Recycl
         return list.size
     }
 
-    class MainRecyclerViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
+    class MainRecyclerViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(title: String, subtitle: String) {
             view.title.text = title
             view.subtitle.text = subtitle
