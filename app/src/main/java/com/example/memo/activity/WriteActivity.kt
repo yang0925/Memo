@@ -15,7 +15,7 @@ class WriteActivity : AppCompatActivity() {
         save_button.setOnClickListener {
             val intent = Intent()
             intent.putExtra("title", title_editText.text.toString())
-            intent.putExtra("subtitle", subtitle_editText.text.toString())
+            intent.putExtra("contents", contents_editText.text.toString())
             setResult(Activity.RESULT_OK, intent)
             finish()
         }

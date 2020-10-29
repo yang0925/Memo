@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         Thread{
             dao.getAll().forEach {
-                adapter.addItem(MainRecyclerViewData(it.title, it.subtitle))
+                adapter.addItem(MainRecyclerViewData(it.title, it.contents))
             }
         }.start()
 
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 val item = adapter.getItem(viewHolder.adapterPosition)
                 Thread{
                     item?.let{
-                        dao.delete(it.title, it.subtitle)
+                        dao.delete(it.title, it.contents)
                     }
                 }.start()
                 adapter.removeAt(viewHolder.adapterPosition)
@@ -72,10 +73,10 @@ class MainActivity : AppCompatActivity() {
                 100 -> {
                     val dao = MemoDatabase.getInstance(context = applicationContext).memoDao()
 
-                    adapter.addItem(MainRecyclerViewData(data!!.getStringExtra("title").toString(), data!!.getStringExtra("subtitle").toString()))
+                    adapter.addItem(MainRecyclerViewData(data!!.getStringExtra("title").toString(), data!!.getStringExtra("contents").toString()))
 
                     Thread{
-                        dao.addMemo(memo = Memo(0, data!!.getStringExtra("title").toString(),data!!.getStringExtra("subtitle").toString()))
+                        dao.addMemo(memo = Memo(0, data!!.getStringExtra("title").toString(),data!!.getStringExtra("contents").toString()))
                     }.start()
 
                 }

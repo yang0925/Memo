@@ -8,5 +8,5 @@ import androidx.room.PrimaryKey
 data class Memo (
     @PrimaryKey(autoGenerate = true) val id: Long,
     @ColumnInfo(name = "title") val title: String,
-    @ColumnInfo(name = "subtitle") val subtitle: String
+    @ColumnInfo(name = "contents") val contents: String
 )
